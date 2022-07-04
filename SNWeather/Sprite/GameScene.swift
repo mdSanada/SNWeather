@@ -15,6 +15,12 @@ class GameScene: SKScene {
     private let flickerInterval = TimeInterval(0.04)
     private var timer: Timer?
     
+    internal func configure(size: CGSize) {
+        self.scaleMode = .aspectFill
+        self.size = size
+        self.anchorPoint = CGPoint(x: 0.5, y: 0.5)
+    }
+    
     private func createLine(pointA: CGPoint, pointB: CGPoint) -> SKShapeNode {
         let pathToDraw = CGMutablePath()
         pathToDraw.move(to: pointA)
@@ -103,26 +109,20 @@ class GameScene: SKScene {
     }
 }
 
-enum WeatherCondition {
-    case clouds
-    case rain
-    case thunderstorm
-    case snow
-    case mist
-    case drizzle
-    case smoke
-    case dust
-    case fog
-    case ash
-    case tornado
-    case clear
-}
-
 extension GameScene {
-    internal func addThunderAnimation(starting: CGPoint) {
-        Timer.scheduledTimer(withTimeInterval: 3, repeats: true) { timer in
-            self.timer = timer
-            DispatchQueue.main.asyncAfter(deadline: .now() + CGFloat.random(in: 3...5)) {
+    internal func addThunderAnimation(starting: CGPoint, weight: WeatherWeight?) {
+        var range: (min: CGFloat, max: CGFloat) {
+            switch weight {
+            case .light:
+                return (min: 15, max: 30)
+            case .heavy:
+                return (min: 3, max: 8)
+            default:
+                return (min: 5, max: 15)
+            }
+        }
+        timer = Timer.scheduledTimer(withTimeInterval: 3, repeats: true) { timer in
+            DispatchQueue.main.asyncAfter(deadline: .now() + CGFloat.random(in: range.min...range.max)) {
                 let strikeStartingPoint = starting
                 let lightningPath = self.genrateLightningPath(startingFrom: strikeStartingPoint, angle: 0, isBranch: false)
                 
@@ -136,31 +136,48 @@ extension GameScene {
         self.timer = nil
     }
     
-    internal func addCloudAnimation() {
-        
+    internal func addCloudAnimation(emmiter: SKEmitterNode?) {
+        guard let emmiter = emmiter else { return }
+        emmiter.position.y = self.frame.maxY + 10
+        emmiter.particlePositionRange.dx = self.frame.width
     }
     
-    internal func addRainAnimation() {
-        
+    internal func addRainAnimation(emmiter: SKEmitterNode?) {
+        guard let emmiter = emmiter else { return }
+        emmiter.position.x = self.frame.midX
+        emmiter.position.y = self.frame.maxY
+        emmiter.particlePositionRange.dx = self.frame.width
     }
     
-    internal func addSnowAnimation() {
-        
+    internal func addSnowAnimation(emmiter: SKEmitterNode?) {
+        guard let emmiter = emmiter else { return }
+        emmiter.position.x = self.frame.midX
+        emmiter.position.y = self.frame.maxY
+        emmiter.particlePositionRange.dx = self.frame.width
     }
     
-    internal func addWindAnimation() {
-        
+    internal func addWindAnimation(emmiter: SKEmitterNode?) {
+        guard let emmiter = emmiter else { return }
+        emmiter.position.x = self.frame.minX
+        emmiter.particlePositionRange.dy = self.frame.height
+        emmiter.particleColor = .brown
     }
     
-    internal func addSmokeAnimation() {
-        
+    internal func addSmokeAnimation(emmiter: SKEmitterNode?) {
+        guard let emmiter = emmiter else { return }
+        emmiter.position.y = self.frame.minY - 300
+        emmiter.particlePositionRange.dx = self.frame.width
     }
     
-    internal func addAshesAnimation() {
-        
+    internal func addAshesAnimation(emmiter: SKEmitterNode?) {
+        guard let emmiter = emmiter else { return }
+        emmiter.position.y = self.frame.minY - 300
+        emmiter.particlePositionRange.dx = self.frame.width
     }
     
-    internal func addDustAnimation() {
-        
+    internal func addDustAnimation(emmiter: SKEmitterNode?) {
+        guard let emmiter = emmiter else { return }
+        emmiter.position.y = self.frame.minY - 300
+        emmiter.particlePositionRange.dx = self.frame.width
     }
 }

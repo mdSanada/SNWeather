@@ -28,6 +28,8 @@
 		168678C2287313B800295FF3 /* RainLanding.sks in Resources */ = {isa = PBXBuildFile; fileRef = 168678C1287313B800295FF3 /* RainLanding.sks */; };
 		168678C82873170300295FF3 /* SnowLanding.sks in Resources */ = {isa = PBXBuildFile; fileRef = 168678C72873170300295FF3 /* SnowLanding.sks */; };
 		168678CA28731A4D00295FF3 /* WeatherSKView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 168678C928731A4D00295FF3 /* WeatherSKView.swift */; };
+		168678CD2873257B00295FF3 /* WeatherCondition.swift in Sources */ = {isa = PBXBuildFile; fileRef = 168678CC2873257B00295FF3 /* WeatherCondition.swift */; };
+		168678CF2873258B00295FF3 /* WeatherNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 168678CE2873258A00295FF3 /* WeatherNode.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -74,6 +76,8 @@
 		168678C1287313B800295FF3 /* RainLanding.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = RainLanding.sks; sourceTree = "<group>"; };
 		168678C72873170300295FF3 /* SnowLanding.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = SnowLanding.sks; sourceTree = "<group>"; };
 		168678C928731A4D00295FF3 /* WeatherSKView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeatherSKView.swift; sourceTree = "<group>"; };
+		168678CC2873257B00295FF3 /* WeatherCondition.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeatherCondition.swift; sourceTree = "<group>"; };
+		168678CE2873258A00295FF3 /* WeatherNode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeatherNode.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -125,6 +129,7 @@
 			isa = PBXGroup;
 			children = (
 				1605C54A2864BE3600041499 /* SNWeather.entitlements */,
+				168678CB2873256900295FF3 /* WeatherModel */,
 				168678C4287313C300295FF3 /* Sprite */,
 				1605C51A2864BE0900041499 /* AppDelegate.swift */,
 				1605C51C2864BE0900041499 /* SceneDelegate.swift */,
@@ -171,6 +176,15 @@
 				168678C928731A4D00295FF3 /* WeatherSKView.swift */,
 			);
 			path = Sprite;
+			sourceTree = "<group>";
+		};
+		168678CB2873256900295FF3 /* WeatherModel */ = {
+			isa = PBXGroup;
+			children = (
+				168678CC2873257B00295FF3 /* WeatherCondition.swift */,
+				168678CE2873258A00295FF3 /* WeatherNode.swift */,
+			);
+			path = WeatherModel;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -318,6 +332,8 @@
 				1605C51B2864BE0900041499 /* AppDelegate.swift in Sources */,
 				160FAEE02865528800CD4967 /* GameScene.swift in Sources */,
 				168678CA28731A4D00295FF3 /* WeatherSKView.swift in Sources */,
+				168678CF2873258B00295FF3 /* WeatherNode.swift in Sources */,
+				168678CD2873257B00295FF3 /* WeatherCondition.swift in Sources */,
 				1605C51D2864BE0900041499 /* SceneDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
