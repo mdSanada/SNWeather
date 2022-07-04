@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="19529" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
+    <device id="mac" appearance="light" renderMode="macOS"/>
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="19519"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="System colors in document resources" minToolsVersion="11.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <scenes>
+        <!--View Controller-->
+        <scene sceneID="tne-QT-ifu">
+            <objects>
+                <viewController id="BYZ-38-t0r" customClass="ViewController" customModule="SNWeather" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
+                        <rect key="frame" x="0.0" y="0.0" width="800" height="600"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="1c45dccbdf9306b2f2487f7ea4c560ce" translatesAutoresizingMaskIntoConstraints="NO" id="iqf-KT-nqx">
+                                <rect key="frame" x="0.0" y="0.0" width="800" height="600"/>
+                                <preferredSymbolConfiguration key="preferredSymbolConfiguration" scale="default"/>
+                            </imageView>
+                            <visualEffectView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="mA7-co-99O">
+                                <rect key="frame" x="180" y="236" width="440" height="128"/>
+                                <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" id="MKN-n6-8X9">
+                                    <rect key="frame" x="0.0" y="0.0" width="440" height="128"/>
+                                    <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                    <subviews>
+                                        <visualEffectView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="iTF-lB-Jne">
+                                            <rect key="frame" x="0.0" y="0.0" width="440" height="128"/>
+                                            <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" id="mR2-3h-k6g">
+                                                <rect key="frame" x="0.0" y="0.0" width="440" height="128"/>
+                                                <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                                <subviews>
+                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Nuvens Formation" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="H8u-lW-mID">
+                                                        <rect key="frame" x="151" y="54" width="139" height="21"/>
+                                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                        <nil key="textColor"/>
+                                                        <nil key="highlightedColor"/>
+                                                    </label>
+                                                </subviews>
+                                                <constraints>
+                                                    <constraint firstItem="H8u-lW-mID" firstAttribute="centerX" secondItem="mR2-3h-k6g" secondAttribute="centerX" id="DHv-AC-lJl"/>
+                                                    <constraint firstItem="H8u-lW-mID" firstAttribute="centerY" secondItem="mR2-3h-k6g" secondAttribute="centerY" id="vR9-Ah-OJX"/>
+                                                </constraints>
+                                            </view>
+                                            <vibrancyEffect>
+                                                <blurEffect style="regular"/>
+                                            </vibrancyEffect>
+                                        </visualEffectView>
+                                    </subviews>
+                                    <constraints>
+                                        <constraint firstAttribute="trailing" secondItem="iTF-lB-Jne" secondAttribute="trailing" id="0M1-BG-rmf"/>
+                                        <constraint firstItem="iTF-lB-Jne" firstAttribute="leading" secondItem="MKN-n6-8X9" secondAttribute="leading" id="5Sl-bz-YQP"/>
+                                        <constraint firstItem="iTF-lB-Jne" firstAttribute="top" secondItem="MKN-n6-8X9" secondAttribute="top" id="TtG-ta-YYy"/>
+                                        <constraint firstAttribute="bottom" secondItem="iTF-lB-Jne" secondAttribute="bottom" id="ypV-km-tR0"/>
+                                    </constraints>
+                                </view>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="128" id="jgw-sg-00H"/>
+                                </constraints>
+                                <blurEffect style="regular"/>
+                            </visualEffectView>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
+                        <color key="backgroundColor" systemColor="systemIndigoColor"/>
+                        <constraints>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="mA7-co-99O" secondAttribute="trailing" constant="180" id="3rR-9O-NMc"/>
+                            <constraint firstItem="mA7-co-99O" firstAttribute="centerY" secondItem="8bC-Xf-vdC" secondAttribute="centerY" id="B8B-4w-YZI"/>
+                            <constraint firstItem="iqf-KT-nqx" firstAttribute="bottom" secondItem="6Tk-OE-BBY" secondAttribute="bottom" id="V66-UN-K1Y"/>
+                            <constraint firstItem="iqf-KT-nqx" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" id="WAo-Mw-vYC"/>
+                            <constraint firstItem="iqf-KT-nqx" firstAttribute="trailing" secondItem="6Tk-OE-BBY" secondAttribute="trailing" id="Z25-HO-Ke8"/>
+                            <constraint firstItem="iqf-KT-nqx" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="o8o-SI-M73"/>
+                            <constraint firstItem="mA7-co-99O" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="180" id="q3m-hE-YHZ"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="card" destination="mA7-co-99O" id="IKA-te-oQv"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="30" y="98"/>
+        </scene>
+    </scenes>
+    <resources>
+        <image name="1c45dccbdf9306b2f2487f7ea4c560ce" width="610" height="892"/>
+        <systemColor name="systemIndigoColor">
+            <color red="0.34509803921568627" green="0.33725490196078434" blue="0.83921568627450982" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </systemColor>
+    </resources>
+</document>
