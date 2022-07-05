@@ -7,15 +7,17 @@
 
 import SpriteKit
 import GameplayKit
+import Cocoa
 
 class GameScene: SKScene {
-    private let darkBackgroundColor = UIColor.systemGray.withAlphaComponent(0.5)
-    private let litUpBackgroundColor = UIColor.clear
-    private let lightningStrikeColor = UIColor(red: 255/255, green: 212/255, blue: 251/255, alpha: 0.4)
+    private let darkBackgroundColor = NSColor.systemGray.withAlphaComponent(0.5)
+    private let litUpBackgroundColor = NSColor.clear
+    private let lightningStrikeColor = NSColor(red: 255/255, green: 212/255, blue: 251/255, alpha: 0.4)
     private let flickerInterval = TimeInterval(0.04)
     private var timer: Timer?
     
     internal func configure(size: CGSize) {
+        self.backgroundColor = .clear
         self.scaleMode = .aspectFill
         self.size = size
         self.anchorPoint = CGPoint(x: 0.5, y: 0.5)

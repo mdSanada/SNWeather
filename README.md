@@ -1,2 +1,0 @@
-# SNWeather
-Weather Mac App

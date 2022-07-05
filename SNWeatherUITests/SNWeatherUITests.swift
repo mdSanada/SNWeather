@@ -2,7 +2,7 @@
 //  SNWeatherUITests.swift
 //  SNWeatherUITests
 //
-//  Created by Matheus D Sanada on 23/06/22.
+//  Created by Matheus D Sanada on 04/07/22.
 //
 
 import XCTest

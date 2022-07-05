@@ -5,7 +5,8 @@
 //  Created by Matheus D Sanada on 04/07/22.
 //
 
-import UIKit
+import Foundation
+import Cocoa
 import SpriteKit
 
 class WeatherSKView: SKView {
@@ -18,9 +19,9 @@ class WeatherSKView: SKView {
     
     override init(frame: CGRect) {
         super.init(frame: frame)
-        self.backgroundColor = .clear
+        self.allowsTransparency = true
         self.ignoresSiblingOrder = true
-        self.showsFPS = false
+        self.showsFPS = true
         self.showsNodeCount = false
         self.configureScene(size: frame.size)
     }
