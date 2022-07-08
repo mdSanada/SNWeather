@@ -1282,11 +1282,11 @@
                             </customView>
                             <scrollView autohidesScrollers="YES" horizontalLineScroll="24" horizontalPageScroll="10" verticalLineScroll="24" verticalPageScroll="10" usesPredominantAxisScrolling="NO" translatesAutoresizingMaskIntoConstraints="NO" id="tQa-8a-1Ku">
                                 <rect key="frame" x="0.0" y="42" width="300" height="610"/>
-                                <clipView key="contentView" drawsBackground="NO" id="Y1O-2U-Ng9">
+                                <clipView key="contentView" ambiguous="YES" drawsBackground="NO" id="Y1O-2U-Ng9">
                                     <rect key="frame" x="1" y="1" width="298" height="608"/>
                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                     <subviews>
-                                        <tableView verticalHuggingPriority="750" allowsExpansionToolTips="YES" columnAutoresizingStyle="lastColumnOnly" multipleSelection="NO" emptySelection="NO" autosaveColumns="NO" rowHeight="24" rowSizeStyle="automatic" viewBased="YES" id="bdU-2A-W1v">
+                                        <tableView verticalHuggingPriority="750" ambiguous="YES" allowsExpansionToolTips="YES" columnAutoresizingStyle="lastColumnOnly" multipleSelection="NO" emptySelection="NO" autosaveColumns="NO" rowHeight="24" rowSizeStyle="automatic" viewBased="YES" id="bdU-2A-W1v">
                                             <rect key="frame" x="0.0" y="0.0" width="298" height="608"/>
                                             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                             <size key="intercellSpacing" width="17" height="0.0"/>
@@ -1362,7 +1362,7 @@
                                     <constraint firstAttribute="width" constant="300" id="ljh-nC-F4o"/>
                                 </constraints>
                                 <scroller key="horizontalScroller" hidden="YES" wantsLayer="YES" verticalHuggingPriority="750" horizontal="YES" id="W3Q-EK-Ihf">
-                                    <rect key="frame" x="1" y="703" width="298" height="16"/>
+                                    <rect key="frame" x="1" y="593" width="298" height="16"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                 </scroller>
                                 <scroller key="verticalScroller" hidden="YES" wantsLayer="YES" verticalHuggingPriority="750" horizontal="NO" id="gzx-rc-Ooz">

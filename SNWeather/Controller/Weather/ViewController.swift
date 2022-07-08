@@ -56,11 +56,7 @@ class ViewController: NSViewController {
     @IBOutlet weak var labelLongDate: NSTextField!
     
     var skWeather: WeatherSKView?
-    var cityDataSource: [WeatherDTO] = [] {
-        didSet {
-            tableView.reloadData()
-        }
-    }
+    var cityDataSource: [WeatherDTO] = []
     var timer: Timer?
     internal var lastIndex: Int?
     internal var ignoreSelection: Bool = false
@@ -95,6 +91,7 @@ class ViewController: NSViewController {
     }
     
     internal func onChanged(index: Int) {
+        if index < 0 { return }
         if ignoreSelection { return }
         if lastIndex != index {
             configureScreen(index: index)

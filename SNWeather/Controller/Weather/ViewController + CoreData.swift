@@ -12,6 +12,7 @@ extension ViewController {
     func getFavoritesWeathers(in data: inout [WeatherDTO]) -> [WeatherDTO] {
         let weathers = CoreDataHelper.fetch()
         data = weathers
+        tableView.reloadData()
         return weathers
     }
 }
