@@ -104,7 +104,7 @@ enum WeatherCondition: Equatable, Hashable {
         case .rain(let weight):
             switch weight {
             case .heavy:
-                return WeatherNodeAttributes(birthrate: 600, acceleration: -350)
+                return WeatherNodeAttributes(birthrate: 900, acceleration: -350)
             case .light:
                 return WeatherNodeAttributes(birthrate: 200, acceleration: -200)
             default:

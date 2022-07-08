@@ -10,9 +10,9 @@ import Cocoa
 import SpriteKit
 
 class WeatherSKView: SKView {
-    private let weatherScene: GameScene = GameScene()
+    let weatherScene: GameScene = GameScene()
     private var nodes: Set<WeatherNode> = []
-
+    
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
@@ -21,7 +21,7 @@ class WeatherSKView: SKView {
         super.init(frame: frame)
         self.allowsTransparency = true
         self.ignoresSiblingOrder = true
-        self.showsFPS = true
+        self.showsFPS = false
         self.showsNodeCount = false
         self.configureScene(size: frame.size)
     }
@@ -61,7 +61,7 @@ class WeatherSKView: SKView {
         }
         nodes.removeAll()
     }
-
+    
     private func configureScene(size: CGSize) {
         weatherScene.configure(size: size)
         self.presentScene(weatherScene)
@@ -81,7 +81,7 @@ class WeatherSKView: SKView {
         case .thunderstorm(let weight):
             weatherScene.addRainAnimation(emmiter: condition.node)
             let witdhBound = self.frame.width / 4
-            weatherScene.addThunderAnimation(starting: CGPoint(x: CGFloat.random(in: (-witdhBound)...(witdhBound)),
+            weatherScene.addThunderAnimation(starting: CGPoint(x: self.frame.midX,
                                                                y: self.frame.height / 2),
                                              weight: weight)
         case .snow:

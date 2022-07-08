@@ -7,63 +7,118 @@
 
 import Cocoa
 import SnapKit
+import SpriteKit
 
-class ViewController: NSViewController, NSTableViewDelegate, NSTableViewDataSource {
+class ViewController: NSViewController {
     @IBOutlet weak var weatherView: NSView!
+    // MARK: - Title
+    @IBOutlet weak var labelTitle: NSTextField!
+    
+    @IBOutlet weak var searchField: NSSearchField!
+    
+    // MARK: - Background Image
     @IBOutlet weak var imageView: NSImageView!
+    
+    // MARK: - Table View Citys
     @IBOutlet weak var tableView: NSTableView!
-    @IBOutlet weak var titleCard: NSVisualEffectView!
+    
+    // MARK: - Card Temperature
     @IBOutlet weak var tempCard: NSVisualEffectView!
-    var skWeather: WeatherSKView!
+    @IBOutlet weak var labelTemp: NSTextField!
+    
+    // MARK: - Card Range (Max / Min) Temperature
+    @IBOutlet weak var tempRangeCard: NSVisualEffectView!
+    @IBOutlet weak var labelTempMin: NSTextField!
+    @IBOutlet weak var labelTempMax: NSTextField!
+    
+    // MARK: - Card General Informations
+    @IBOutlet weak var infosCard: NSVisualEffectView!
+    
+    // MARK: First Section Feels Like
+    @IBOutlet weak var labelFeelsLike: NSTextField!
+    
+    // MARK: Second Section Pressure, Humidity and Visibility
+    @IBOutlet weak var labelPressure: NSTextField!
+    @IBOutlet weak var labelHumidity: NSTextField!
+    @IBOutlet weak var labelVisibility: NSTextField!
+    
+    // MARK: Third Section Wind, Rain, Clouds and Snow
+    @IBOutlet weak var labelWind: NSTextField!
+    @IBOutlet weak var labelRain: NSTextField!
+    @IBOutlet weak var labelClouds: NSTextField!
+    @IBOutlet weak var labelSnow: NSTextField!
+    
+    // MARK: Fourth Section Sunrise and Sunset
+    @IBOutlet weak var labelSunrise: NSTextField!
+    @IBOutlet weak var labelSunset: NSTextField!
+    
+    // MARK: Footer Long Date
+    @IBOutlet weak var labelLongDate: NSTextField!
+    
+    var skWeather: WeatherSKView?
+    var cityDataSource = [(city: "São Paulo", gmt: -10800), (city: "Nova Iorque", gmt: -14400), (city: "Londres", gmt: 3600)] {
+        didSet {
+            tableView.reloadData()
+        }
+    }
+    var timer: Timer?
+    internal var lastIndex: Int?
+    internal var ignoreSelection: Bool = false
 
     override func viewDidLoad() {
         super.viewDidLoad()
-//        addVisualEffect()
+        labelTitle.addShadow()
+        configureCards()
+        configureTable()
+        configureTimer()
         
-        addAnimation()
-        imageView.imageScaling = .scaleAxesIndependently
-        tableView.backgroundColor = .clear
-        tableView.delegate = self
-        tableView.dataSource = self
-        
-//        let visualEffect = NSVisualEffectView()
-//        visualEffect.blendingMode = .behindWindow
-//        visualEffect.state = .active
-//        visualEffect.material = .popover
-//        titleCard?.addSubview(visualEffect)
-        titleCard.alphaValue = 0.8
-        tempCard.alphaValue = 0.98
-        
-        tempCard.wantsLayer = true
-        tempCard.layer?.cornerRadius = 30
-        tempCard.layer?.masksToBounds = true
-        // Do any additional setup after loading the view.
+        configureWeather(index: 0)
+        configureScreen(index: 0)
     }
     
     override func viewWillAppear() {
+        super.viewWillAppear()
     }
-
+    
     override var representedObject: Any? {
         didSet {
         }
     }
-
-    private func addAnimation() {
-        skWeather = WeatherSKView(frame: CGRect(x: 0, y: 0, width: 1920, height: 1080))
-        skWeather.addConditions([.snow(weight: .heavy)])
-        weatherView.addSubview(skWeather)
-        weatherView.addSubview(skWeather, positioned: .above, relativeTo: imageView)
-        skWeather.snp.makeConstraints { make in
-            make.top.bottom.trailing.leading.equalToSuperview()
+    
+    fileprivate func configureTimer() {
+        TimerHelper.configureTimer { timer in
+            self.timer = timer
+        } handler: {
+            self.attDate()
         }
     }
-
-    func numberOfRows(in tableView: NSTableView) -> Int {
-        return 5
+    
+    internal func onChanged(index: Int) {
+        if ignoreSelection { return }
+        if lastIndex != index {
+            configureScreen(index: index)
+            configureWeather(index: index)
+            configureLongDate(index: index)
+            setTitle(for: index)
+        }
+        lastIndex = index
     }
     
-    func tableView(_ tableView: NSTableView, heightOfRow row: Int) -> CGFloat {
-        50
+    fileprivate func configureScreen(index: Int) {
+        configureBackground(image: NSImage(named: "placeholder"))
+    }
+    
+    fileprivate func configureWeather(index: Int) {
+        let weatherTest = WeatherModel.mock() // should be changed to item in array
+        configureInfos(weatherTest)
+        configureTemp(weatherTest)
+        addWeatherAnimation([.thunderstorm(weight: .heavy), .clouds(weight: .moderate), .rain(weight: .heavy), .fog(weight: .moderate)])
+    }
+    
+    fileprivate func attDate() {
+        ignoreSelection = true
+        tableView.reloadDataKeepingSelection()
+        configureLongDate(index: tableView.selectedRow)
+        ignoreSelection = false
     }
 }
-
