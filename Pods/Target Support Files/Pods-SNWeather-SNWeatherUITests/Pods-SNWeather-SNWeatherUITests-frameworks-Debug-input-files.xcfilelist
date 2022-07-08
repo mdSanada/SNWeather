@@ -1,2 +1,3 @@
 ${PODS_ROOT}/Target Support Files/Pods-SNWeather-SNWeatherUITests/Pods-SNWeather-SNWeatherUITests-frameworks.sh
+${BUILT_PRODUCTS_DIR}/CoreStore/CoreStore.framework
 ${BUILT_PRODUCTS_DIR}/SnapKit/SnapKit.framework

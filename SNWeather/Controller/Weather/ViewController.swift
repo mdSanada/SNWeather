@@ -56,7 +56,7 @@ class ViewController: NSViewController {
     @IBOutlet weak var labelLongDate: NSTextField!
     
     var skWeather: WeatherSKView?
-    var cityDataSource = [(city: "São Paulo", gmt: -10800), (city: "Nova Iorque", gmt: -14400), (city: "Londres", gmt: 3600)] {
+    var cityDataSource: [WeatherDTO] = [] {
         didSet {
             tableView.reloadData()
         }
@@ -67,6 +67,7 @@ class ViewController: NSViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        getFavoritesWeathers(in: &cityDataSource)
         labelTitle.addShadow()
         configureCards()
         configureTable()

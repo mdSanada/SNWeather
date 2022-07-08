@@ -29,7 +29,7 @@ extension ViewController: NSTableViewDataSource, NSTableViewDelegate {
     func tableView(_ tableView: NSTableView, viewFor tableColumn: NSTableColumn?, row: Int) -> NSView? {
         if let cell = tableView.makeView(withIdentifier: NSUserInterfaceItemIdentifier(rawValue: CellIdentifiers.WeatherCell), owner: nil) as? WeatherCell {
             cell.render(title: cityDataSource[row].city,
-                        time: DateHelper.getDate(secondsFromGMT: cityDataSource[row].gmt))
+                        time: DateHelper.getDate(secondsFromGMT: cityDataSource[row].timezone))
             return cell
         }
         return nil

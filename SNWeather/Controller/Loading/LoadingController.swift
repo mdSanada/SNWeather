@@ -12,19 +12,29 @@ class LoadingController: NSViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        // Do view setup here.
         inderterminateProgressBar.startAnimation(self)
         fetchSuccess()
     }
     
     
     func fetchSuccess() {
-        DispatchQueue.main.asyncAfter(deadline: .now() + 5) {
-            self.inderterminateProgressBar.stopAnimation(self)
-            let storyboard = NSStoryboard(name: "Main", bundle: nil)
-            guard let controller = storyboard.instantiateController(withIdentifier: "Weather") as? ViewController else { return }
-            self.present(controller, animator: MyTransitionAnimator())
-        }
+        CoreDataHelper.start(onSuccess: {
+            CoreDataHelper.mock()
+            DispatchQueue.main.asyncAfter(deadline: .now() + 5) {
+                self.animateStart()
+            }
+        }, onError: {
+            DispatchQueue.main.asyncAfter(deadline: .now() + 5) {
+                self.animateStart()
+            }
+        })
+    }
+    
+    func animateStart() {
+        self.inderterminateProgressBar.stopAnimation(self)
+        let storyboard = NSStoryboard(name: "Main", bundle: nil)
+        guard let controller = storyboard.instantiateController(withIdentifier: "Weather") as? ViewController else { return }
+        self.present(controller, animator: MyTransitionAnimator())
     }
 }
 

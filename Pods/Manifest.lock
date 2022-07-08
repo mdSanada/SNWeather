@@ -1,16 +1,20 @@
 PODS:
+  - CoreStore (8.1.0)
   - SnapKit (5.6.0)
 
 DEPENDENCIES:
+  - CoreStore
   - SnapKit
 
 SPEC REPOS:
   trunk:
+    - CoreStore
     - SnapKit
 
 SPEC CHECKSUMS:
+  CoreStore: 497ade3103f1ffd95d09c2658f9008d10c7d3082
   SnapKit: e01d52ebb8ddbc333eefe2132acf85c8227d9c25
 
-PODFILE CHECKSUM: be7c3ce723ac57d0c6ca156d70a68eb0eab8f383
+PODFILE CHECKSUM: 70369e2a43cf3a11907378392aececa856abdf74
 
 COCOAPODS: 1.11.3

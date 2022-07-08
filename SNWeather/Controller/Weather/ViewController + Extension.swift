@@ -25,7 +25,7 @@ extension ViewController {
     
     internal func configureLongDate(index: Int) {
         let pattern = "HH:mm ' - ' EEEE ', ' dd ' de ' MMMM ' de ' yyyy"
-        labelLongDate.cell?.title = DateHelper.getDate(secondsFromGMT: cityDataSource[index].gmt, pattern: pattern)
+        labelLongDate.cell?.title = DateHelper.getDate(secondsFromGMT: cityDataSource[index].timezone, pattern: pattern)
     }
     
     internal func configureTemp(_ weather: WeatherModel) {

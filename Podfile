@@ -7,6 +7,7 @@ target 'SNWeather' do
 
   # Pods for SNWeather
   pod 'SnapKit'
+  pod 'CoreStore'
 
   target 'SNWeatherTests' do
     inherit! :search_paths
