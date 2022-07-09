@@ -8,7 +8,7 @@
 import Foundation
 
 enum WeatherService {
-    case weather(lat: String, lon: String)
+    case weather(lat: Double, lon: Double)
 }
 
 extension WeatherService: SNNetworkTask {
@@ -34,8 +34,8 @@ extension WeatherService: SNNetworkTask {
         switch self {
         case let .weather(lat, lon):
             var param: [String: Any] = [:]
-            param["lat"] = lat
-            param["lon"] = lon
+            param["lat"] = String(lat)
+            param["lon"] = String(lon)
             param["appid"] = "2150350500cc755d7f60182823511e26"
             param["lang"] = "pt_br"
             param["units"] = "metric"

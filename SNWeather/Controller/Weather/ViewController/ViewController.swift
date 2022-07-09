@@ -98,22 +98,26 @@ class ViewController: NSViewController {
     }
         
     fileprivate func attDate() {
-        viewModel.ignoreSelection = true
-        tableView.reloadDataKeepingSelection()
-        let index = viewModel.lastIndex ?? 0
-        guard let section = tableView.getActualSection(for: index) else { return }
-        labelLongDate.cell?.title = viewModel.configureLongDate(section: section, index: index) ?? ""
-        viewModel.ignoreSelection = false
+        DispatchQueue.main.async {
+            self.viewModel.ignoreSelection = true
+            self.tableView.reloadDataKeepingSelection()
+            let index = self.viewModel.lastIndex ?? 0
+            guard let section = self.tableView.getActualSection(for: index) else { return }
+            self.labelLongDate.cell?.title = self.viewModel.configureLongDate(section: section, index: index) ?? ""
+            self.viewModel.ignoreSelection = false
+        }
     }
 }
 
 extension ViewController: WeatherOutput {
     func onChanged(index: Int) {
-        configureScreen(index: index)
-        configureWeather(index: index)
-        guard let section = tableView.getActualSection(for: index) else { return }
-        labelLongDate.cell?.title = viewModel.configureLongDate(section: section, index: index) ?? ""
-        setTitle(for: index)
+        DispatchQueue.main.async {
+            self.configureScreen(index: index)
+            self.configureWeather(index: index)
+            guard let section = self.tableView.getActualSection(for: index) else { return }
+            self.labelLongDate.cell?.title = self.viewModel.configureLongDate(section: section, index: index) ?? ""
+            self.setTitle(for: index)
+        }
     }
     
     func reloadData() {
@@ -145,22 +149,29 @@ extension ViewController: WeatherOutput {
     }
     
     func didSaveWeather() {
-        searchField.cell?.title = ""
-        searchField.resignFirstResponder()
-        viewModel.searchedItems = []
-        tableView.reloadDataKeepingSelection()
+        DispatchQueue.main.async {
+            self.searchField.cell?.title = ""
+            self.searchField.resignFirstResponder()
+            self.viewModel.searchedItems = []
+            self.tableView.reloadDataKeepingSelection()
+        }
     }
     
     fileprivate func configureScreen(index: Int) {
-        configureBackground(image: NSImage(named: "placeholder"))
+        DispatchQueue.main.async {
+            self.configureBackground(image: NSImage(named: "placeholder"))
+        }
     }
     
     // TODO: - Add response do weather e configurar a scene
     fileprivate func configureWeather(index: Int) {
-        let weatherTest = WeatherModel.mock()
-        configureInfos(weatherTest)
-        configureTemp(weatherTest)
-        addWeatherAnimation([.thunderstorm(weight: .heavy), .clouds(weight: .moderate), .rain(weight: .heavy), .fog(weight: .moderate)])
+        DispatchQueue.main.async {
+            guard let section = self.tableView.getActualSection(for: index), let row = self.tableView.getRowInSection(index) else { return }
+            guard let weather = self.viewModel.dataSource[section][row].details else { return }
+            self.configureInfos(weather)
+            self.configureTemp(weather)
+            self.addWeatherAnimation([.thunderstorm(weight: .heavy), .clouds(weight: .moderate), .rain(weight: .heavy), .fog(weight: .moderate)])
+        }
     }
 
 }

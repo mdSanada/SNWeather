@@ -14,4 +14,5 @@ struct WeatherDTO {
     let lon: Double
     var timezone: Int
     let uuid: UUID
+    var details: WeatherModel?
 }

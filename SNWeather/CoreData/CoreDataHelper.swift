@@ -13,11 +13,6 @@ class CoreDataHelper {
     static let dataStack = DataStack(xcodeModelName: "WeatherCoreData") // keep reference to the stack
 
     static func start(onSuccess: @escaping (() -> ()), onError: @escaping (() -> ())) {
-        let paths = NSSearchPathForDirectoriesInDomains(FileManager.SearchPathDirectory.documentDirectory, FileManager.SearchPathDomainMask.userDomainMask, true)
-        let path = paths[0] + "/LocalStore.sqlite"
-        print(path.trimmingCharacters(in: CharacterSet.whitespacesAndNewlines))
-
-
         do {
             try dataStack.addStorageAndWait()
             onSuccess()
@@ -28,11 +23,7 @@ class CoreDataHelper {
     }
     
     static func mock() {
-//        deleteAll()
-
-        CoreDataHelper.save(weather: WeatherDTO(city: "Guarulhos", countryCode: "BR", lat: -46.53333, lon: -46.53333, timezone: -10800, uuid: UUID()))
-//        CoreDataHelper.save(weather: WeatherDTO(city: "Nova York", timezone: -14400, uuid: UUID()))
-//        CoreDataHelper.save(weather: WeatherDTO(city: "Londres", timezone: 3600, uuid: UUID()))
+        CoreDataHelper.save(weather: WeatherDTO(city: "Guarulhos", countryCode: "BR", lat: -46.53333, lon: -46.53333, timezone: -10800, uuid: UUID(), details: nil))
     }
     
     static func save(weather: WeatherDTO) {
@@ -43,12 +34,14 @@ class CoreDataHelper {
                     debugPrint("🌐 Saving")
                     let weatherCD = transaction.create(Into<WeatherCD>())
                     weatherCD.city = weather.city
+                    weatherCD.countryCode = weather.countryCode
+                    weatherCD.lat = weather.lat
+                    weatherCD.lon = weather.lon
                     weatherCD.timezone = Int16(weather.timezone)
                     weatherCD.id = UUID()
                     weatherCD.updatedDate = Date()
                 }
             }
-            debugPrint("🌐 Already saved")
         } catch {
             debugPrint("🌐 Error")
         }
@@ -86,7 +79,7 @@ class CoreDataHelper {
     static func fetch() -> [WeatherDTO] {
         do {
             let objects = try dataStack.fetchAll(From<WeatherCD>())
-            print("🌐 \(objects.map { "\($0.city ?? "") + \($0.timezone ?? -1)" })")
+            print("🌐 \(objects.map { "\($0.city ?? "") \($0.countryCode) + \($0.timezone ?? -1)" })")
             return objects.map { weather in
                 if let city = weather.city, let countryCode = weather.countryCode, let uuid = weather.id {
                     let lat = weather.lat

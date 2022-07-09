@@ -20,7 +20,7 @@ extension WeatherViewModel {
             guard let data = searched.data else { return }
             let response = data.map { info -> WeatherDTO? in
                 if let name = info.name, let countryCode = info.countryCode, let lon = info.longitude, let lat = info.latitude {
-                    return WeatherDTO(city: name, countryCode: countryCode, lat: lat, lon: lon, timezone: 0, uuid: UUID())
+                    return WeatherDTO(city: name, countryCode: countryCode, lat: lat, lon: lon, timezone: 0, uuid: UUID(), details: nil)
                 } else {
                     return nil
                 }
@@ -34,17 +34,24 @@ extension WeatherViewModel {
     }
     
     // TODO: - Add request do TEMPO da cidade e retirar mock
-    func getWeather(city: String) -> WeatherModel {
-        isAddLoading = true
-        let weather = WeatherModel.mock()
-        DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
-            self.isAddLoading = false
+    func getWeather(weather: WeatherDTO) {
+        weatherManager.request(.weather(lat: weather.lat, lon: weather.lon),
+                               map: WeatherModel.self) { loading in
+            self.isAddLoading = loading
+        } onSuccess: { weatherDetail in
+            var _weather = weather
+            print(weather)
+            if let timezone = weatherDetail.timezone {
+                _weather.timezone = timezone
+            }
+            _weather.details = weatherDetail
             self.output?.didSaveWeather()
-//            let weather = WeatherDTO(city: city, timezone: 0, uuid: UUID()) // MOCK
-//            CoreDataHelper.save(weather: weather)
-//            self.cityDataSource.append(weather)
+            CoreDataHelper.save(weather: _weather)
+            self.cityDataSource.append(_weather)
+            self.output?.reloadData()
+        } onError: { error in
+            self.output?.didSaveWeather()
             self.output?.reloadData()
         }
-        return weather
     }
 }

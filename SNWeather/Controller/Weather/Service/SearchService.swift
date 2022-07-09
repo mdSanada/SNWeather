@@ -7,16 +7,6 @@
 
 import Foundation
 
-//class SearchService {
-//    let url = "https://wft-geo-db.p.rapidapi.com/v1/geo/cities?namePrefix="
-//https://wft-geo-db.p.rapidapi.com/v1/geo/cities?namePrefix=new
-//    let headers = [
-//        "X-RapidAPI-Key": "a48415d00fmsh229ca4dc569e5eap1d082ejsnb1f86cc68127",
-//        "X-RapidAPI-Host": "wft-geo-db.p.rapidapi.com"
-//    ]
-//
-//}
-//
 enum SearchService {
     case search(city: String)
 }

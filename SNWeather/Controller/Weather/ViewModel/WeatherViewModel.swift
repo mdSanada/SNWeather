@@ -63,9 +63,9 @@ class WeatherViewModel {
 
 extension WeatherViewModel: SearchedWeather {
     // TODO: - utilizar o response
-    func didAdd(city: String) {
+    func didAdd(weather: WeatherDTO) {
         if isAddLoading { return }
-        getWeather(city: city)
+        getWeather(weather: weather)
     }
 }
 

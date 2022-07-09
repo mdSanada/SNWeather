@@ -159,7 +159,7 @@ class WeatherTableView: NSTableView, NSTableViewDelegate, NSTableViewDataSource 
         } else if section == 1 {
             guard let searchedDelegate = searchedDelegate else { return nil }
             if let cell = tableView.makeView(withIdentifier: NSUserInterfaceItemIdentifier(rawValue: CellIdentifiers.SearchedWeatherCell), owner: nil) as? SearchedWeatherCell {
-                cell.render(title: weather.city, delegate: searchedDelegate, isFirst: rowInSection == 0)
+                cell.render(weather: weather, delegate: searchedDelegate, isFirst: rowInSection == 0)
                 return cell
             }
         }

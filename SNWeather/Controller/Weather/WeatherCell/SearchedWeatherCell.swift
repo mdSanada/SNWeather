@@ -8,12 +8,12 @@
 import Cocoa
 
 protocol SearchedWeather {
-    func didAdd(city: String)
+    func didAdd(weather: WeatherDTO)
 }
 
 class SearchedWeatherCell: NSTableCellView {
     @IBOutlet weak var labelTitle: NSTextField!
-    var city: String? = nil
+    var weather: WeatherDTO? = nil
     var delegate: SearchedWeather? = nil
     @IBOutlet weak var spacer: NSBox!
     
@@ -22,15 +22,15 @@ class SearchedWeatherCell: NSTableCellView {
     }
     
     @IBAction func actionAdd(_ sender: Any) {
-        guard let city = city else {
+        guard let weather = weather else {
             return
         }
-        delegate?.didAdd(city: city)
+        delegate?.didAdd(weather: weather)
     }
     
-    func render(title: String, delegate: SearchedWeather, isFirst: Bool) {
-        labelTitle.cell?.title = title
-        self.city = title
+    func render(weather: WeatherDTO, delegate: SearchedWeather, isFirst: Bool) {
+        labelTitle.cell?.title = weather.city + ", " + weather.countryCode
+        self.weather = weather
         self.delegate = delegate
         self.spacer.isHidden = !isFirst
     }

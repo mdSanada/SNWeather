@@ -13,6 +13,7 @@ extension Double {
         let numberFormatter = NumberFormatter()
         numberFormatter.locale = .current
         numberFormatter.minimumFractionDigits = 0
+        numberFormatter.maximumFractionDigits = 0
         numberFormatter.numberStyle = .decimal
         guard let value = numberFormatter.string(from: NSNumber(value: self)) else { return "" }
         return value + "ºC"
