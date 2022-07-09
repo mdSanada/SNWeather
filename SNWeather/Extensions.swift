@@ -75,3 +75,43 @@ extension NSTableView {
         self.selectRowIndexes(selectedRowIndexes, byExtendingSelection: false)
     }
 }
+
+extension Dictionary {
+    public var data: Data? {
+        do {
+            let jsonData = try JSONSerialization.data(withJSONObject: self, options: .prettyPrinted)
+            return jsonData
+        } catch {
+            return nil
+        }
+    }
+}
+
+extension Data {
+    public func map<D: Decodable>(to type: D.Type) -> D? {
+        do {
+            let response = try JSONDecoder().decode(type.self, from: self)
+            return response
+        } catch let jsonErr {
+            return nil
+       }
+    }
+    
+    public var dictionary: [String: Any]? {
+        do {
+            let json = try JSONSerialization.jsonObject(with: self, options: .mutableContainers) as? [String:Any]
+            return json
+        } catch let jsonErr {
+            return nil
+       }
+    }
+    
+    public var prettyJson: String? {
+        guard let object = try? JSONSerialization.jsonObject(with: self, options: []),
+              let data = try? JSONSerialization.data(withJSONObject: object, options: [.prettyPrinted]),
+              let prettyPrintedString = String(data: data, encoding:.utf8) else { return nil }
+
+        return prettyPrintedString
+    }
+}
+

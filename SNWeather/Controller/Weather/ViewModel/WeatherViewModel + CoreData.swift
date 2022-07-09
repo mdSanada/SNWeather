@@ -8,11 +8,9 @@
 import Cocoa
 import CoreData
 
-extension ViewController {
-    func getFavoritesWeathers(in data: inout [WeatherDTO]) -> [WeatherDTO] {
+extension WeatherViewModel {
+    func getFavoritesWeathers(in data: inout [WeatherDTO]) {
         let weathers = CoreDataHelper.fetch()
         data = weathers
-        tableView.reloadData()
-        return weathers
     }
 }

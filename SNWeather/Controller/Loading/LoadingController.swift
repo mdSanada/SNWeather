@@ -16,7 +16,6 @@ class LoadingController: NSViewController {
         fetchSuccess()
     }
     
-    
     func fetchSuccess() {
         CoreDataHelper.start(onSuccess: {
             CoreDataHelper.mock()

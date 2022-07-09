@@ -20,12 +20,8 @@ extension ViewController {
     }
     
     internal func setTitle(for index: Int) {
-        labelTitle.cell?.title = cityDataSource[index].city
-    }
-    
-    internal func configureLongDate(index: Int) {
-        let pattern = "HH:mm ' - ' EEEE ', ' dd ' de ' MMMM ' de ' yyyy"
-        labelLongDate.cell?.title = DateHelper.getDate(secondsFromGMT: cityDataSource[index].timezone, pattern: pattern)
+        guard let section = tableView.getActualSection(for: index) else { return }
+        labelTitle.cell?.title = viewModel.dataSource[section][index].city
     }
     
     internal func configureTemp(_ weather: WeatherModel) {
@@ -47,4 +43,13 @@ extension ViewController {
         labelSunset.cell?.title = weather.sys?.sunset?.date(with: weather.timezone ?? 0) ?? ""
     }
     
+    internal func addWeatherAnimation(_ conditions: [WeatherCondition]) {
+        skWeather?.removeAllConditions()
+        skWeather = WeatherSKView(frame: CGRect(x: 0, y: 0, width: 1920, height: 1080))
+        skWeather?.addConditions(conditions)
+        weatherView.addSubview(skWeather!, positioned: .above, relativeTo: imageView)
+        skWeather?.snp.makeConstraints { make in
+            make.top.bottom.trailing.leading.equalToSuperview()
+        }
+    }
 }

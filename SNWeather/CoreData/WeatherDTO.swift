@@ -9,6 +9,9 @@ import Foundation
 
 struct WeatherDTO {
     let city: String
-    let timezone: Int
+    let countryCode: String
+    let lat: Double
+    let lon: Double
+    var timezone: Int
     let uuid: UUID
 }
