@@ -57,6 +57,7 @@ class ViewController: NSViewController {
     @IBOutlet weak var progressIndicator: NSProgressIndicator!
     
     var skWeather: WeatherSKView?
+    var initialWeathers: [WeatherDTO] = []
     var viewModel = WeatherViewModel()
     var timer: Timer?
     let debouncer = Debouncer(timeInterval: 1)
@@ -84,7 +85,7 @@ class ViewController: NSViewController {
     }
     
     private func configureViewModel() {
-        viewModel.configure(output: self)
+        viewModel.configure(output: self, initialWeathers: &initialWeathers)
         tableView.configureTable(interface: viewModel,
                                  searchedDelegate: viewModel)
     }
@@ -159,18 +160,20 @@ extension ViewController: WeatherOutput {
     
     fileprivate func configureScreen(index: Int) {
         DispatchQueue.main.async {
-            self.configureBackground(image: NSImage(named: "placeholder"))
+            guard let section = self.tableView.getActualSection(for: index), let row = self.tableView.getRowInSection(index) else { return }
+            guard let weather = self.viewModel.dataSource[section][row].details else { return }
+            let icon = weather.weather?.first?.icon?.compactMap({$0}).last.map { $0 == "n" ? "night" : "day"} ?? "placeholder"
+            self.configureBackground(image: NSImage(named: icon))
         }
     }
     
-    // TODO: - Add response do weather e configurar a scene
     fileprivate func configureWeather(index: Int) {
         DispatchQueue.main.async {
             guard let section = self.tableView.getActualSection(for: index), let row = self.tableView.getRowInSection(index) else { return }
             guard let weather = self.viewModel.dataSource[section][row].details else { return }
             self.configureInfos(weather)
             self.configureTemp(weather)
-            self.addWeatherAnimation([.thunderstorm(weight: .heavy), .clouds(weight: .moderate), .rain(weight: .heavy), .fog(weight: .moderate)])
+            self.addWeatherAnimation(weather.condition())
         }
     }
 

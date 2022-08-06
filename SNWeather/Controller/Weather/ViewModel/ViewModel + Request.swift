@@ -6,9 +6,8 @@
 //
 
 import Foundation
-
+// TODO: - Adicionar MOCK
 extension WeatherViewModel {
-    // TODO: - Fazer o request de PESQUISA da cidade
     func search(city: String) {
         if city.count < 3 || isSearchLoading { return }
         
@@ -33,7 +32,6 @@ extension WeatherViewModel {
         }
     }
     
-    // TODO: - Add request do TEMPO da cidade e retirar mock
     func getWeather(weather: WeatherDTO) {
         weatherManager.request(.weather(lat: weather.lat, lon: weather.lon),
                                map: WeatherModel.self) { loading in

@@ -794,15 +794,15 @@
                                                                     <rect key="frame" x="0.0" y="45" width="230" height="35"/>
                                                                     <subviews>
                                                                         <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="FX3-Qs-n0X">
-                                                                            <rect key="frame" x="-2" y="8" width="74" height="19"/>
-                                                                            <textFieldCell key="cell" lineBreakMode="clipping" alignment="left" title="Temp min" id="TFz-Ui-LKp">
+                                                                            <rect key="frame" x="-2" y="8" width="78" height="19"/>
+                                                                            <textFieldCell key="cell" lineBreakMode="clipping" alignment="left" title="Temp máx" id="TFz-Ui-LKp">
                                                                                 <font key="font" metaFont="systemLight" size="16"/>
                                                                                 <color key="textColor" red="1" green="1" blue="1" alpha="0.5" colorSpace="custom" customColorSpace="sRGB"/>
                                                                                 <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
                                                                             </textFieldCell>
                                                                         </textField>
                                                                         <textField verticalHuggingPriority="751" horizontalCompressionResistancePriority="751" verticalCompressionResistancePriority="751" translatesAutoresizingMaskIntoConstraints="NO" id="4ZZ-3g-lYf">
-                                                                            <rect key="frame" x="68" y="0.0" width="164" height="35"/>
+                                                                            <rect key="frame" x="72" y="0.0" width="160" height="35"/>
                                                                             <textFieldCell key="cell" lineBreakMode="clipping" alignment="right" title="30º C" id="5eG-Wb-C3I">
                                                                                 <font key="font" metaFont="systemLight" size="30"/>
                                                                                 <color key="textColor" red="1" green="1" blue="1" alpha="0.5" colorSpace="custom" customColorSpace="sRGB"/>

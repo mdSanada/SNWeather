@@ -48,9 +48,10 @@ class WeatherViewModel {
     init() {
     }
     
-    func configure(output: WeatherOutput) {
-        getFavoritesWeathers(in: &cityDataSource)
+    func configure(output: WeatherOutput, initialWeathers: inout [WeatherDTO]) {
         self.output = output
+            cityDataSource = initialWeathers
+        initialWeathers = []
     }
 
     internal func configureLongDate(section: Int, index: Int) -> String? {
@@ -62,7 +63,6 @@ class WeatherViewModel {
 }
 
 extension WeatherViewModel: SearchedWeather {
-    // TODO: - utilizar o response
     func didAdd(weather: WeatherDTO) {
         if isAddLoading { return }
         getWeather(weather: weather)
