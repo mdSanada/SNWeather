@@ -32,9 +32,14 @@ class LoadingController: NSViewController {
     func fetchAllWeathers(completed: @escaping (([WeatherDTO]) -> ())) {
         DispatchQueue.main.async {
             var weathers = self.getFavoritesWeathers()
+            var onErrorIndexes: [Int] = []
             var allSuccess: [Bool?] = weathers.map { _ in false } {
                 didSet {
                     if allSuccess.compactMap({ $0 }).allSatisfy({ $0 }) {
+                        onErrorIndexes.forEach {
+                            CoreDataHelper.delete(weather: weathers[$0])
+                            weathers.remove(at: $0)
+                        }
                         completed(weathers)
                     }
                 }
@@ -50,10 +55,10 @@ class LoadingController: NSViewController {
                     weathers[(index)].details = weather
                     allSuccess[index] = true
                 }, onError: { error in
-                    weathers.remove(at: index)
+                    onErrorIndexes.append(index)
                     allSuccess[index] = true
                 }, onMapError: { data in
-                    weathers.remove(at: index)
+                    onErrorIndexes.append(index)
                     allSuccess[index] = true
                 })
             }
