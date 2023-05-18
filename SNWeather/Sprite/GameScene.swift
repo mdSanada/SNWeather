@@ -2,8 +2,6 @@
 //  GameScene.swift
 //  LightningGenerator
 //
-//  Created by Artturi Jalli on 9.1.2021.
-//
 
 import SpriteKit
 import GameplayKit
